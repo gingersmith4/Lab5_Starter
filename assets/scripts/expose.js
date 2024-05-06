@@ -4,7 +4,6 @@ window.addEventListener('DOMContentLoaded', init);
 let audioChoice = "";
 
 function init() {
-  // TODO
   console.log("hello");
   /* When you select a horn from the drop down menu, the following should occur:
   The correct image should display
@@ -12,9 +11,10 @@ function init() {
   */
   const horn = document.getElementById("horn-select");
   horn.addEventListener("input", updateHorn);
+  let choice = horn.value;
 
   function updateHorn() {
-    let choice = horn.value;
+    choice = horn.value;
     console.log(choice);
     let choiceImage = document.querySelector('img');
     let imgPath = "assets/images/" + choice + ".svg";
@@ -23,8 +23,7 @@ function init() {
     audioChoice = audioPath;
   }
 
-
-  /* // TODO
+  /* 
   When you change the volume on the slider, the following should occur:
     At zero volume, the mute icon (level 0) should be displayed
     From 1 to < 33 volume the first volume level should be displayed
@@ -34,6 +33,7 @@ function init() {
     The corresponding volume should be set for the audio element 
     (note: this element’s volume is not out of 100, it's out of 1)
   */
+  let audioPlayer = document.getElementsByClassName("hidden")[0];
   let audio = document.getElementById("volume");
   audio.addEventListener("input", updateAudio);
   function updateAudio() {
@@ -48,30 +48,25 @@ function init() {
     } else {
       soundImg.src = "assets/icons/volume-level-3.svg";
     }
-    audio.volume = currVolume / 100;
+    audioPlayer.volume = currVolume / 100;
   }
 
-
-  /* // TODO 
+  /*  
   When you click the “Play Sound” button the following should occur:
     The corresponding sound for the horn selected should play out loud at the specified volume
     If the Party Horn is selected, confetti should shoot out out, as shown in the video
   */
+ let soundButton = document.querySelector('button');
+ soundButton.addEventListener("click", playAudio);
+ function playAudio() {
+  console.log(audioPlayer);
+  let audioPath = "assets/audio/" + choice + ".mp3";
+  audioPlayer.src = audioPath;
+  audioPlayer.play();
+  if(choice == "party-horn"){
+    const jsConfetti = new JSConfetti();
+    jsConfetti.addConfetti();
+  }
 
-  // Source: mozilla This handler will be executed every time the cursor
-  // is moved over a item
-  const test = document.getElementById("expose");
-  test.addEventListener(
-    "mouseover",
-    (event) => {
-      // highlight the mouseover target
-      event.target.style.color = "orange";
-
-      // reset the color after a short delay
-      setTimeout(() => {
-        event.target.style.color = "";
-      }, 500);
-    },
-    false,
-  );
+ }
 }
