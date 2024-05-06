@@ -4,6 +4,7 @@ window.addEventListener('DOMContentLoaded', init);
 
 function init() {
   // TODO
+  console.log("hello");
   /* When you select a horn from the drop down menu, the following should occur:
   The correct image should display
   The correct audio sound file should be set 
@@ -12,8 +13,15 @@ function init() {
   horn.addEventListener("input", updateValue);
 
 function updateValue() {
-  let choice = horn.target.value;
-  img = choice.svg;
+  let choice = horn.value;
+  console.log(choice);
+  let choiceImage = document.querySelector('img');
+  let path = "assets/images/" + choice + ".svg";
+  console.log(path);
+  console.log(choiceImage);
+
+  choiceImage.src = path;
+  //img = choice.svg;
 }
 
 
