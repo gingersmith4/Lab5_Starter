@@ -12,10 +12,13 @@ function init() {
   const horn = document.getElementById("horn-select");
   horn.addEventListener("input", updateValue);
 
-function updateValue() {
-  let choice = horn.target.value;
-  img = choice.svg;
-}
+  function updateValue() {
+    let choice = horn.value;
+    console.log(choice);
+    let choiceImage = document.querySelector('img');
+    let path = "assets/images/" + choice + ".svg";
+    choiceImage.src = path;
+  }
 
 
   /* When you change the volume on the slider, the following should occur:
