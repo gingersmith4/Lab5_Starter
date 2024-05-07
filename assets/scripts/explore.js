@@ -14,6 +14,8 @@ function init() {
   */
  
   const synth = window.speechSynthesis;
+  let menu = document.getElementById("voice-select");
+
   synth.addEventListener("voiceschanged", () => {
     let voices = speechSynthesis.getVoices();
     let length = voices.length;
@@ -24,7 +26,7 @@ function init() {
       option.setAttribute("data-lang", voices[i].lang);
       option.setAttribute("data-name", voices[i].name);
 
-      document.getElementById("voice-select").appendChild(option);
+      menu.appendChild(option);
     }
 });
 
@@ -34,7 +36,18 @@ function init() {
 The text that you have typed into the “Text to speak here” 
 textarea should be spoken out loud using the voice that you have selected
     */
+//We referenced this code: ://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis/speak
+let talkButton = document.querySelector('button');
+talkButton.addEventListener("click", playAudio);
+function playAudio() {
+  var text = document.getElementById("text-to-speak").value;  
+  console.log(text);
+  const sayThis = new SpeechSynthesisUtterance(text);
+  synth.voice = menu.value;
+  console.log(synth.voice);
+synth.speak(sayThis);
 
+}
 
 //TODO 
 /*
