@@ -1,3 +1,4 @@
+
 // explore.js
 
 window.addEventListener('DOMContentLoaded', init);
@@ -66,8 +67,6 @@ sayThis.onend = function() {
 };
 
 }
-
-
 
 
 
